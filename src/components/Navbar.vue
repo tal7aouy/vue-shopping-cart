@@ -47,6 +47,7 @@
       <div>
         <input
           type="text"
+          v-model="query"
           placeholder="Search by ..."
           class="no-underline inline-block text-sm px-4 py-3 leading-none rounded text-white bg-gray-800 focus:bg-gray-600 mt-4 sm:mt-0 border-none"
         />
@@ -56,20 +57,36 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 export default {
   name: 'Navbar',
-  setup() {
-    const open = ref(false)
-    function toggle() {
-      open.value = !open.value
+  data() {
+    return {
+      open: false,
+      query: '',
     }
-    return { toggle, open }
+  },
+  watch: {
+    query(search) {
+      console.log(search)
+      this.$store.commit('setSearch', search)
+    },
+  },
+  methods: {
+    toggle() {
+      this.open = !this.open
+    },
   },
 }
 </script>
 <style scoped>
 a.router-link-exact-active {
   color: rgba(79, 70, 229, 0.6);
+}
+a:hover {
+  transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+}
+nav {
+  box-shadow: rgb(0 0 0/69%) 0px 26px 30px -10px,
+    rgb(0 0 0/73%) 0px 16px 10px -10px;
 }
 </style>
