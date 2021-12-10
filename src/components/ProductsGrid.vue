@@ -26,11 +26,25 @@
               formatNumber(product.price)
             }}</span>
             <button
+              @click="addToCart(product)"
+              :id="'product' + product.id"
               type="button"
-              class="bg-blue-500 px-4 py-1 text-white rounded-md transition-all duration-200 ease-in-out hover:bg-blue-400 font-serif transform hover:scale-105"
+              class="bg-blue-400 px-5 py-1 font-sans text-white rounded-md transition-all duration-200 ease-in-out hover:bg-blue-400 transform hover:scale-105"
             >
               Add
             </button>
+            <div :id="'product+' + product.id" class="hidden rounded-md">
+              <button class="bg-gray-200 px-2 rounded-l-md font-semibold py-1">
+                -
+              </button>
+              <span
+                class="text-gray-800 font-semibold bg-gray-100 px-2 py-1 border border-gray-200"
+                >0</span
+              >
+              <button class="bg-gray-200 px-2 rounded-r-md font-semibold py-1">
+                +
+              </button>
+            </div>
           </div>
         </div>
       </transition-group>
@@ -47,11 +61,22 @@ export default {
   data() {
     return {
       formatNumber,
+      isAdded: false,
     }
   },
   computed: {
     products() {
       return this.$store.getters.availableProducts
+    },
+  },
+  methods: {
+    addToCart(product) {
+      document.getElementById(`product${product.id}`).classList.toggle('hidden')
+
+      document
+        .getElementById(`product+${product.id}`)
+        .classList.remove('hidden')
+      document.getElementById(`product+${product.id}`).classList.remove('flex')
     },
   },
 }
