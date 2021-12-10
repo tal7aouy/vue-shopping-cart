@@ -41,7 +41,10 @@
                 class="text-gray-800 font-semibold bg-gray-100 px-2 py-1 border border-gray-200"
                 >0</span
               >
-              <button class="bg-gray-200 px-2 rounded-r-md font-semibold py-1">
+              <button
+                @click="$store.dispatch('addProductToCart', product)"
+                class="bg-gray-200 px-2 rounded-r-md font-semibold py-1"
+              >
                 +
               </button>
             </div>
@@ -72,11 +75,13 @@ export default {
   methods: {
     addToCart(product) {
       document.getElementById(`product${product.id}`).classList.toggle('hidden')
-
       document
         .getElementById(`product+${product.id}`)
         .classList.remove('hidden')
       document.getElementById(`product+${product.id}`).classList.remove('flex')
+      if (product) {
+        this.$store.dispatch('addProductToCart', product)
+      }
     },
   },
 }

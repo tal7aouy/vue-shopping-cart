@@ -39,9 +39,14 @@
         </router-link>
         <router-link
           to="/cart"
-          class="font-semibold no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter hover:text-white mr-4"
+          class="font-semibold no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter relative hover:text-white mr-4"
         >
-          <i class="fas fa-cart-plus mr-1"></i>Cart
+          <i class="fas fa-cart-plus mr-1"></i>
+          Cart
+          <span
+            class="absolute left-1 -top-3 rounded-full p-0 m-0 text-blue-400 font-medium text-xs leading-normal text-center"
+            >0
+          </span>
         </router-link>
       </div>
       <div>
