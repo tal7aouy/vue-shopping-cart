@@ -29,14 +29,14 @@
         </div>
       </div>
       <div class="flex-1 flex items-end justify-between text-sm">
-        <p class="text-gray-500">Qty {{ product.quantity }}</p>
+        <p class="text-gray-500 font-semibold">Qty {{ product.quantity }}</p>
 
         <div class="flex">
           <button
             type="button"
-            class="font-medium text-indigo-600 hover:text-indigo-500"
+            class="font-medium text-gray-600 hover:text-gray-500  transition transform hover:-translate-y-0.5"
           >
-            Remove
+            <i class="fas fa-trash-alt text-red-600 text-xl"></i>
           </button>
         </div>
       </div>

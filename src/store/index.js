@@ -6,7 +6,7 @@ export default createStore({
     search: '',
     cart: [],
     products: data,
-    open: false
+    open: false,
   },
   mutations: {
     setSearch(state, payload) {
@@ -30,12 +30,11 @@ export default createStore({
     decrementCartProductQuantity(state, cartItem) {
       if (cartItem) {
         cartItem.quantity--
-        
       }
     },
     openCart(state, payload) {
       state.open = payload
-    }
+    },
   },
   getters: {
     availableProducts(state) {
@@ -47,16 +46,21 @@ export default createStore({
       })
     },
     cartProducts(state) {
-      return state.cart.map(cartItem=> {
-        const product = state.products.find(product=> product.id === cartItem.id)
+      return state.cart.map((cartItem) => {
+        const product = state.products.find(
+          (product) => product.id === cartItem.id
+        )
         return {
           name: product.name,
           price: product.price,
           photo: product.photo,
-          quantity: cartItem.quantity
+          quantity: cartItem.quantity,
         }
       })
-      }
+    },
+    cartTotal(state, getters) {
+      return getters.cartProducts.reduce((total,product)=> total+= product.price * product.quantity,0)
+    }
   },
   actions: {
     addProductToCart({ state, commit }, product) {
@@ -77,7 +81,7 @@ export default createStore({
         // decrement quantity
         commit('decrementCartProductQuantity', cartItem)
         product.stock++
-      } 
+      }
     },
   },
   modules: {},

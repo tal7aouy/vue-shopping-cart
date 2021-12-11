@@ -87,11 +87,9 @@
                       class="flex justify-between text-base font-medium text-gray-900"
                     >
                       <p>Subtotal</p>
-                      <p>$262.00</p>
+                      <p>{{formatNumber(total)}}</p>
                     </div>
-                    <p class="mt-0.5 text-sm text-gray-500">
-                      Shipping and taxes calculated at checkout.
-                    </p>
+                  
                     <div class="mt-6">
                       <a
                         href="#"
@@ -141,6 +139,8 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 import {mapGetters, mapMutations, mapState} from 'vuex'
+import { formatNumber } from "@/utils/helpers";
+
 export default {
   name: 'Cart',
   components: {
@@ -153,10 +153,15 @@ export default {
     TransitionRoot,
     CartItem
   },
-  
+  data() {
+    return {
+      formatNumber
+    }
+  },
   computed:{
     ...mapGetters({
-      products:'cartProducts'
+      products:'cartProducts',
+      'total': 'cartTotal'
     }),
     ...mapState({
       open: 'open'
