@@ -7,10 +7,32 @@
         <div
           v-for="product in products"
           :key="product.id"
-          class="flex flex-col text-justify bg-gray-300 rounded-md shadow-lg relative"
+          class="
+            flex flex-col
+            text-justify
+            bg-gray-300
+            rounded-md
+            shadow-lg
+            relative
+          "
         >
           <span
-            class="absolute left-2 top-2 w-6 h-6 flex justify-center items-center rounded-full bg-gray-900 border-none outline-none text-indigo-600 shadow-lg"
+            class="
+              absolute
+              left-2
+              top-2
+              w-6
+              h-6
+              flex
+              justify-center
+              items-center
+              rounded-full
+              bg-gray-900
+              border-none
+              outline-none
+              text-indigo-600
+              shadow-lg
+            "
             >{{ product.stock }}</span
           >
           <img
@@ -18,7 +40,9 @@
             class="p-2 rounded-md w-full h-full"
             alt=""
           />
-          <h4 class="text-center font-medium text-gray-700">
+          <h4
+            class="text-center text-sm md:text-base font-medium text-gray-700"
+          >
             {{ product.name }}
           </h4>
           <div class="flex items-center justify-around my-3">
@@ -29,20 +53,43 @@
               @click="addToCart(product)"
               :id="'product' + product.id"
               type="button"
-              class="bg-blue-400 px-5 py-1 font-sans text-white rounded-md transition-all duration-200 ease-in-out hover:bg-blue-400 transform hover:scale-105"
+              class="
+                bg-blue-400
+                px-5
+                py-1
+                font-sans
+                text-white
+                rounded-md
+                transition-all
+                duration-200
+                ease-in-out
+                hover:bg-blue-400
+                transform
+                hover:scale-105
+              "
             >
               Add
             </button>
             <div :id="'product+' + product.id" class="hidden rounded-md">
-              <button  @click="$store.dispatch('decrementQuantity', product)" class="bg-gray-200 px-2 rounded-l-md font-semibold py-1">
+              <button
+                @click="decrementQuantity(product)"
+                class="bg-gray-200 px-2 rounded-l-md font-semibold py-1"
+              >
                 -
               </button>
               <span
-                class="text-gray-800 font-semibold bg-gray-100 px-2 py-1 border border-gray-200"
+                class="
+                  text-gray-800
+                  font-semibold
+                  bg-gray-100
+                  px-2
+                  py-1
+                  border border-gray-200
+                "
                 >0</span
               >
               <button
-                @click="$store.dispatch('addProductToCart', product)"
+                @click="incrementQuantity(product)"
                 class="bg-gray-200 px-2 rounded-r-md font-semibold py-1"
               >
                 +
@@ -58,33 +105,47 @@
 </template>
 
 <script>
-import { formatNumber } from '@/utils/helpers'
+import { formatNumber } from "@/utils/helpers";
+import {mapGetters} from 'vuex'
 export default {
-  name: 'ProductsGrid',
+  name: "ProductsGrid",
   data() {
     return {
       formatNumber,
       isAdded: false,
-    }
+    };
   },
   computed: {
-    products() {
-      return this.$store.getters.availableProducts
-    },
+    ...mapGetters({
+      products:'availableProducts'
+    })
+   
   },
   methods: {
     addToCart(product) {
-      document.getElementById(`product${product.id}`).classList.toggle('hidden')
+      document
+        .getElementById(`product${product.id}`)
+        .classList.toggle("hidden");
       document
         .getElementById(`product+${product.id}`)
-        .classList.remove('hidden')
-      document.getElementById(`product+${product.id}`).classList.remove('flex')
+        .classList.remove("hidden");
+      document.getElementById(`product+${product.id}`).classList.remove("flex");
       if (product) {
-        this.$store.dispatch('addProductToCart', product)
+        this.$store.dispatch("addProductToCart", product);
+      }
+    },
+    decrementQuantity(product) {
+      if (product) {
+        this.$store.dispatch("decrementQuantity", product);
+      }
+    },
+    incrementQuantity(product) {
+      if (product) {
+        this.$store.dispatch("addProductToCart", product);
       }
     },
   },
-}
+};
 </script>
 
 <style scoped>

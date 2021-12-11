@@ -4,6 +4,7 @@
       <Navbar />
     </template>
     <products-grid />
+    <Cart />
   </app-layout>
 </template>
 
@@ -12,8 +13,9 @@
 import AppLayout from '@/components/layout/AppLayout.vue'
 import Navbar from '@/components/Navbar.vue'
 import ProductsGrid from '@/components/ProductsGrid.vue'
+import Cart from './Cart.vue'
 export default {
   name: 'Home',
-  components: { AppLayout, Navbar, ProductsGrid },
+  components: { AppLayout, Navbar, ProductsGrid,Cart },
 }
 </script>

@@ -6,6 +6,7 @@ export default createStore({
     search: '',
     cart: [],
     products: data,
+    open: false
   },
   mutations: {
     setSearch(state, payload) {
@@ -32,6 +33,9 @@ export default createStore({
         
       }
     },
+    openCart(state, payload) {
+      state.open = payload
+    }
   },
   getters: {
     availableProducts(state) {
@@ -48,6 +52,7 @@ export default createStore({
         return {
           name: product.name,
           price: product.price,
+          photo: product.photo,
           quantity: cartItem.quantity
         }
       })

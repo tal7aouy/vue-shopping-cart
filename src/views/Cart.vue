@@ -4,11 +4,12 @@
       <Navbar />
     </template>
     <!-- cart -->
-    <TransitionRoot as="template" :show="open">
+    <div>
+       <TransitionRoot as="template" :show="open">
       <Dialog
         as="div"
         class="fixed inset-0 overflow-hidden"
-        @close="open = false"
+        @close="openCart(false)"
       >
         <div class="absolute inset-0 overflow-hidden">
           <TransitionChild
@@ -48,7 +49,7 @@
                         <button
                           type="button"
                           class="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                          @click="open = false"
+                          @click="openCart(false)"
                         >
                           <span class="sr-only">Close panel</span>
                           <svg
@@ -71,59 +72,12 @@
 
                     <div class="mt-8">
                       <div class="flow-root">
-                        <ul role="list" class="-my-6 divide-y divide-gray-200">
-                          <li
-                            v-for="product in products"
-                            :key="product.id"
-                            class="py-6 flex"
-                          >
-                            <div
-                              class="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden"
-                            >
-                              <img
-                                :src="product.imageSrc"
-                                :alt="product.imageAlt"
-                                class="w-full h-full object-center object-cover"
-                              />
-                            </div>
-
-                            <div class="ml-4 flex-1 flex flex-col">
-                              <div>
-                                <div
-                                  class="flex justify-between text-base font-medium text-gray-900"
-                                >
-                                  <h3>
-                                    <a :href="product.href">
-                                      {{ product.name }}
-                                    </a>
-                                  </h3>
-                                  <p class="ml-4">
-                                    {{ product.price }}
-                                  </p>
-                                </div>
-                                <p class="mt-1 text-sm text-gray-500">
-                                  {{ product.color }}
-                                </p>
-                              </div>
-                              <div
-                                class="flex-1 flex items-end justify-between text-sm"
-                              >
-                                <p class="text-gray-500">
-                                  Qty {{ product.quantity }}
-                                </p>
-
-                                <div class="flex">
-                                  <button
-                                    type="button"
-                                    class="font-medium text-indigo-600 hover:text-indigo-500"
-                                  >
-                                    Remove
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
+                        <div  class="-my-6 divide-y divide-gray-200">
+                          <CartItem 
+                          v-for="product in products" 
+                          :key="product"
+                           :product="product"/>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -153,7 +107,7 @@
                         <button
                           type="button"
                           class="text-indigo-600 font-medium hover:text-indigo-500"
-                          @click="open = false"
+                          @click="openCart(false)"
                         >
                           Continue Shopping<span aria-hidden="true">
                             &rarr;</span
@@ -169,6 +123,7 @@
         </div>
       </Dialog>
     </TransitionRoot>
+    </div>
     <!-- cart -->
   </app-layout>
 </template>
@@ -177,7 +132,7 @@
 // @ is an alias to /src
 import AppLayout from '@/components/layout/AppLayout.vue'
 import Navbar from '@/components/Navbar.vue'
-import { ref } from 'vue'
+import CartItem from '@/components/CartItem.vue'
 import {
   Dialog,
   DialogOverlay,
@@ -185,33 +140,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
-const products = [
-  {
-    id: 1,
-    name: 'Throwback Hip Bag',
-    href: '#',
-    color: 'Salmon',
-    price: '$90.00',
-    quantity: 1,
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-    imageAlt:
-      'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-  },
-  {
-    id: 2,
-    name: 'Medium Stuff Satchel',
-    href: '#',
-    color: 'Blue',
-    price: '$32.00',
-    quantity: 1,
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-    imageAlt:
-      'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-  },
-  // More products...
-]
+import {mapGetters, mapMutations, mapState} from 'vuex'
 export default {
   name: 'Cart',
   components: {
@@ -222,15 +151,22 @@ export default {
     DialogTitle,
     TransitionChild,
     TransitionRoot,
+    CartItem
   },
-
-  setup() {
-    const open = ref(true)
-
-    return {
-      products,
-      open,
-    }
+  
+  computed:{
+    ...mapGetters({
+      products:'cartProducts'
+    }),
+    ...mapState({
+      open: 'open'
+    }),
+    
   },
+  methods:{
+    ...mapMutations({
+      openCart: 'openCart'
+    })
+  }
 }
 </script>

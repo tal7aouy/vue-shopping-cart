@@ -37,8 +37,9 @@
         >
           <i class="fas fa-home mr-1"></i>Home
         </router-link>
-        <router-link
-          to="/cart"
+        <button role="link"
+         
+          @click="$store.state.open = true"
           class="font-semibold no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter relative hover:text-white mr-4"
         >
           <i class="fas fa-cart-plus mr-1"></i>
@@ -47,7 +48,7 @@
             class="absolute left-1 -top-3 rounded-full p-0 m-0 text-blue-400 font-medium text-xs leading-normal text-center"
             >{{cartLength}}
           </span>
-        </router-link>
+        </button>
       </div>
       <div>
         <input
