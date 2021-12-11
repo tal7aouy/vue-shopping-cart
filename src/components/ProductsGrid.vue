@@ -106,7 +106,7 @@
 
 <script>
 import { formatNumber } from "@/utils/helpers";
-import {mapGetters} from 'vuex'
+import { mapGetters } from "vuex";
 export default {
   name: "ProductsGrid",
   data() {
@@ -117,9 +117,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      products:'availableProducts'
-    })
-   
+      products: "availableProducts",
+    }),
   },
   methods: {
     addToCart(product) {

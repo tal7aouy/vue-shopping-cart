@@ -28,13 +28,18 @@ export default createStore({
     },
     // decrement product quantity in cart
     decrementCartProductQuantity(state, cartItem) {
-      if (cartItem) {
+      if (cartItem.quantity >0) {
         cartItem.quantity--
+      } else {
+        state.cart = state.cart.filter((item) => item.id !== cartItem.id)
       }
     },
     openCart(state, payload) {
       state.open = payload
     },
+   removeCartItem(state,productId) {
+    state.cart = state.cart.filter((item) => item.id !== productId)
+   }
   },
   getters: {
     availableProducts(state) {
@@ -51,6 +56,7 @@ export default createStore({
           (product) => product.id === cartItem.id
         )
         return {
+          id: cartItem.id,
           name: product.name,
           price: product.price,
           photo: product.photo,
@@ -59,8 +65,11 @@ export default createStore({
       })
     },
     cartTotal(state, getters) {
-      return getters.cartProducts.reduce((total,product)=> total+= product.price * product.quantity,0)
-    }
+      return getters.cartProducts.reduce(
+        (total, product) => (total += product.price * product.quantity),
+        0
+      )
+    },
   },
   actions: {
     addProductToCart({ state, commit }, product) {
@@ -77,12 +86,17 @@ export default createStore({
     decrementQuantity({ state, commit }, product) {
       const cartItem = state.cart.find((item) => item.id === product.id)
       // if product exist in cart
-      if (cartItem.quantity > 0) {
+      if (cartItem) {
         // decrement quantity
         commit('decrementCartProductQuantity', cartItem)
         product.stock++
-      }
+      } 
     },
+    removeProduct({commit},product) {
+      if (product) {
+        commit('removeCartItem',product.id)
+      }
+    }
   },
   modules: {},
 })

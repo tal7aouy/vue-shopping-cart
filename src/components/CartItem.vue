@@ -33,6 +33,7 @@
 
         <div class="flex">
           <button
+            @click="remove(product)"
             type="button"
             class="font-medium text-gray-600 hover:text-gray-500  transition transform hover:-translate-y-0.5"
           >
@@ -45,6 +46,7 @@
 </template>
 <script>
 import { formatNumber } from "@/utils/helpers";
+import { mapActions } from 'vuex';
 export default {
   name: "cartItem",
   props:{
@@ -57,6 +59,11 @@ export default {
     return {
       formatNumber
     }
+  },
+  methods:{
+    ...mapActions({
+      remove: 'removeProduct'
+    })
   }
 }
 </script>
