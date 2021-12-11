@@ -25,6 +25,13 @@ export default createStore({
         product.stock--
       }
     },
+    // decrement product quantity in cart
+    decrementCartProductQuantity(state, cartItem) {
+      if (cartItem) {
+        cartItem.quantity--
+        
+      }
+    },
   },
   getters: {
     availableProducts(state) {
@@ -35,6 +42,16 @@ export default createStore({
         )
       })
     },
+    cartProducts(state) {
+      return state.cart.map(cartItem=> {
+        const product = state.products.find(product=> product.id === cartItem.id)
+        return {
+          name: product.name,
+          price: product.price,
+          quantity: cartItem.quantity
+        }
+      })
+      }
   },
   actions: {
     addProductToCart({ state, commit }, product) {
@@ -47,6 +64,15 @@ export default createStore({
         }
         commit('decrementProductStock', product)
       }
+    },
+    decrementQuantity({ state, commit }, product) {
+      const cartItem = state.cart.find((item) => item.id === product.id)
+      // if product exist in cart
+      if (cartItem.quantity > 0) {
+        // decrement quantity
+        commit('decrementCartProductQuantity', cartItem)
+        product.stock++
+      } 
     },
   },
   modules: {},

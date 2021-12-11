@@ -34,7 +34,7 @@
               Add
             </button>
             <div :id="'product+' + product.id" class="hidden rounded-md">
-              <button class="bg-gray-200 px-2 rounded-l-md font-semibold py-1">
+              <button  @click="$store.dispatch('decrementQuantity', product)" class="bg-gray-200 px-2 rounded-l-md font-semibold py-1">
                 -
               </button>
               <span

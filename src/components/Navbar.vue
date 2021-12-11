@@ -45,7 +45,7 @@
           Cart
           <span
             class="absolute left-1 -top-3 rounded-full p-0 m-0 text-blue-400 font-medium text-xs leading-normal text-center"
-            >0
+            >{{cartLength}}
           </span>
         </router-link>
       </div>
@@ -68,6 +68,11 @@ export default {
     return {
       open: false,
       query: '',
+    }
+  },
+  computed:{
+    cartLength() {
+      return this.$store.getters.cartProducts.length
     }
   },
   watch: {
