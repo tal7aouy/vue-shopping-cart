@@ -70,6 +70,7 @@ export default createStore({
         0
       )
     },
+    
   },
   actions: {
     addProductToCart({ state, commit }, product) {
@@ -96,7 +97,8 @@ export default createStore({
       if (product) {
         commit('removeCartItem',product.id)
       }
-    }
+    },
+  
   },
   modules: {},
 })

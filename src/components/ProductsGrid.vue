@@ -121,6 +121,7 @@ export default {
     }),
   },
   methods: {
+    
     addToCart(product) {
       document
         .getElementById(`product${product.id}`)

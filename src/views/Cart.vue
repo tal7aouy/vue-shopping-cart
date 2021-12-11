@@ -1,8 +1,4 @@
 <template>
-  <app-layout>
-    <template #header>
-      <Navbar />
-    </template>
     <!-- cart -->
     <div>
       <TransitionRoot as="template" :show="open">
@@ -164,13 +160,9 @@
       </TransitionRoot>
     </div>
     <!-- cart -->
-  </app-layout>
 </template>
 
 <script>
-// @ is an alias to /src
-import AppLayout from "@/components/layout/AppLayout.vue";
-import Navbar from "@/components/Navbar.vue";
 import CartItem from "@/components/CartItem.vue";
 import {
   Dialog,
@@ -185,8 +177,6 @@ import { formatNumber } from "@/utils/helpers";
 export default {
   name: "Cart",
   components: {
-    AppLayout,
-    Navbar,
     Dialog,
     DialogOverlay,
     DialogTitle,
