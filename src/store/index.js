@@ -77,6 +77,9 @@ export default createStore({
         0
       )
     },
+    cartQuantity(state,getters) {
+      return getters.cartProducts.reduce((total,product)=>total + product.quantity,0)
+    }
     
   },
   actions: {

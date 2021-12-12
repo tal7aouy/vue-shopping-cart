@@ -46,7 +46,7 @@
           Cart
           <span
             class="absolute left-1 -top-3 rounded-full p-0 m-0 text-blue-400 font-medium text-xs leading-normal text-center"
-            >{{cartLength}}
+            >{{cartQuantity}}
           </span>
         </button>
       </div>
@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'Navbar',
   data() {
@@ -72,9 +73,9 @@ export default {
     }
   },
   computed:{
-    cartLength() {
-      return this.$store.getters.cartProducts.length
-    }
+    ...mapGetters({
+      cartQuantity: 'cartQuantity'
+    })
   },
   watch: {
     query(search) {

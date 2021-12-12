@@ -104,27 +104,7 @@
                         <p>{{ formatNumber(total) }}</p>
                       </div>
 
-                      <div class="mt-6">
-                        <a
-                          href="#"
-                          class="
-                            flex
-                            justify-center
-                            items-center
-                            px-6
-                            py-3
-                            border border-transparent
-                            rounded-md
-                            shadow-sm
-                            text-base
-                            font-medium
-                            text-white
-                            bg-indigo-600
-                            hover:bg-indigo-700
-                          "
-                          >Checkout</a
-                        >
-                      </div>
+                  
                       <div
                         class="
                           mt-6
