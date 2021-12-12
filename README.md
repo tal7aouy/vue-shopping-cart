@@ -1,24 +1,19 @@
 # vue-cart
 
-## Project setup
-```
-npm install
-```
+Shopping cart example using Vue 3, Tailwind.css
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Usage
 
-### Compiles and minifies for production
-```
-npm run build
-```
+```bash
+# Install dependencies
+$ npm install
 
-### Lints and fixes files
-```
-npm run lint
-```
+# Compiles and hot-reloads for development
+$ npm run dev
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# Compiles and minifies for production
+$ npm run build
+
+# Vite preview
+$ npm run serve
+```
