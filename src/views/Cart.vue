@@ -114,7 +114,6 @@
                         "
                       >
                         <p>
-                          or
                           <button
                             type="button"
                             class="

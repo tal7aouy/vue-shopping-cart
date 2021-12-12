@@ -78,6 +78,7 @@
                 -
               </button>
               <span
+             
                 class="
                   text-gray-800
                   font-semibold
@@ -86,7 +87,7 @@
                   py-1
                   border border-gray-200
                 "
-                >0</span
+                ></span
               >
               <button
                 @click="incrementQuantity(product)"
@@ -112,17 +113,16 @@ export default {
   data() {
     return {
       formatNumber,
-      isAdded: false,
     };
   },
   computed: {
     ...mapGetters({
       products: "availableProducts",
     }),
+   
   },
   methods: {
-    
-    addToCart(product) {
+    toggleButtons(product) {
       document
         .getElementById(`product${product.id}`)
         .classList.toggle("hidden");
@@ -130,6 +130,11 @@ export default {
         .getElementById(`product+${product.id}`)
         .classList.remove("hidden");
       document.getElementById(`product+${product.id}`).classList.remove("flex");
+    },
+    addToCart(product) {
+      // toggle from add button to -0+ buttons
+      this.toggleButtons(product)
+      // push product to cart
       if (product) {
         this.$store.dispatch("addProductToCart", product);
       }
