@@ -37,8 +37,15 @@ export default createStore({
     openCart(state, payload) {
       state.open = payload
     },
-   removeCartItem(state,productId) {
-    state.cart = state.cart.filter((item) => item.id !== productId)
+   removeCartItem(state,product) {
+    // remove product from cart
+    state.cart = state.cart.filter((item) => item.id !== product.id)
+    const item = state.products.find(item => item.id === product.id)
+    if(item) {
+      // add product's quantity removed to stock
+      item.stock += product.quantity
+    }
+    
    }
   },
   getters: {
@@ -95,7 +102,7 @@ export default createStore({
     },
     removeProduct({commit},product) {
       if (product) {
-        commit('removeCartItem',product.id)
+        commit('removeCartItem',product)
       }
     },
   
