@@ -1,7 +1,7 @@
 <template>
   <section class="w-full h-full my-6 px-4">
     <!-- products -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
       <!-- product item -->
       <transition-group name="products">
         <ProductItem  v-for="product in products"
