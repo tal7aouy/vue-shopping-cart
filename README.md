@@ -1,4 +1,4 @@
-# vue-cart
+# vue-shopping-cart
 
 Shopping cart example using Vue 3, Tailwind.css
 
